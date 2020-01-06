@@ -3,7 +3,7 @@ redis Jupyter notebooks covering redis concepts
 ## Initial project setup
 Get this github code
 ```bash 
-get clone https://github.com/jphaugla/redisJupyter.git
+git clone https://github.com/jphaugla/redisJupyter.git
 ```
 ## docker compose startup
 ```bash
@@ -13,7 +13,7 @@ cd ..
 ```
 ### run the requirements script
 ```bash
-docker exec -it jupyter bash -c "pip install -r demo/requirements.txt
+docker exec -it jupyter bash -c "pip install -r demo/requirements.txt"
 ```
 ### open jupyter
 http://localhost:8888
