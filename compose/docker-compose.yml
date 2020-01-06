@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: redis
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      # REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - ../redis_data:/bitnami/redis/data
+
+  jupyter:
+    image: jupyter/minimal-notebook
+    volumes:
+      - ../demo/:/home/jovyan/demo
+      - ../training/:/home/jovyan/training
+    ports:
+      - 8888:8888
+    container_name: jupyter
+    depends_on:
+      - redis
+
+  insight:
+    image: "redislabs/redisinsight:latest"
+    container_name: insight
+    ports:
+      - "8001:8001"
+    volumes:
+      - ../redisinsight:/db
+    depends_on:
+      - redis
